@@ -19,7 +19,12 @@ class StringCalculatorShould {
     }
     
     @Test
-	void string_return_sum_of_two_numbers(){
+	void string_return_sum_of_two_numbers() {
 		assertEquals(3, stringCalculator.add("1,2"));
+	}
+    
+    @Test
+	void string_return_sum_of_unknown_amount_of_numbers() {
+		assertEquals(10, stringCalculator.add("1,2,3,4"));
 	}
 }

@@ -14,12 +14,23 @@ class StringCalculator {
 		}
 		else
 		{
-			return getIntFromString(numbers[0]) + getIntFromString(numbers[1]);
+			return getSumOfNumbers(numbers);
 		}
 	}
 	
 	//Method to convert String to int
 	private int getIntFromString(String num) {
 		return Integer.parseInt(num);
+	}
+	
+	//Method to get sum of multiple numbers
+	private int getSumOfNumbers(String[] numbers)
+	{
+		int sum = 0;
+		for(String str:numbers)
+		{
+			sum += getIntFromString(str);
+		}
+		return sum;
 	}
 }
