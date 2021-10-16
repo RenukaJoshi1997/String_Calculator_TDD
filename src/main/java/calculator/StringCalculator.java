@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 class StringCalculator {
 
-	public int add(String input) {
+	public int add(String input) throws Exception {
 		String[] numbers = input.split(",|\n");
 
 		if(input.isEmpty())
@@ -13,6 +13,10 @@ class StringCalculator {
 			return 0;
 		}
 		if(input.length() == 1) {
+			if(getIntFromString(input) < 0)
+			{
+				throw new Exception("negative not allowed" + getIntFromString(input));
+			}
 			return getIntFromString(input);
 		}
 		else if(input.startsWith("//")){
