@@ -43,5 +43,8 @@ class StringCalculatorShould {
 		stringCalculator.add("-1");
 	}
     
-    
+    @Test
+   	void throw_exception_for_multiple_negative_number() throws Exception {
+   		stringCalculator.add("-1,3,-6,-8,11");
+   	}
 }

@@ -13,10 +13,6 @@ class StringCalculator {
 			return 0;
 		}
 		if(input.length() == 1) {
-			if(getIntFromString(input) < 0)
-			{
-				throw new Exception("negative not allowed" + getIntFromString(input));
-			}
 			return getIntFromString(input);
 		}
 		else if(input.startsWith("//")){
@@ -35,8 +31,10 @@ class StringCalculator {
 	}
 
 	//Method to get sum of multiple numbers
-	private int getSumOfNumbers(String[] numbers)
+	private int getSumOfNumbers(String[] numbers) throws Exception
 	{
+		negativeNumberNotAllowed(numbers);
+		
 		int sum = 0;
 		for(String str:numbers)
 		{
@@ -44,19 +42,32 @@ class StringCalculator {
 		}
 		return sum;
 	}
-	
+
 	//Method to support different delimiters
-		private String[] getDelimiter(String input)
+	private String[] getDelimiter(String input)
+	{
+		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+		if(matcher.matches())
 		{
-			Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+			String delimiter = matcher.group(1);
+			String toSplit = matcher.group(2);
+			return toSplit.split(delimiter);
+		}
+		throw new RuntimeException("Wrong custom delimiter format");
+	}
+
+	private void negativeNumberNotAllowed(String[] numbers) throws Exception
+	{
+		for(String num: numbers)
+		{
+			Matcher matcher = Pattern.compile("/-\\d+/g").matcher(num);
 			
 			if(matcher.matches())
 			{
-				String delimiter = matcher.group(1);
-				String toSplit = matcher.group(2);
-				return toSplit.split(delimiter);
-			}
-			throw new RuntimeException("Wrong custom delimiter format");
+				throw new Exception("negative not allowed" + getIntFromString(num));
+			}	
 		}
+	}
 
 }
