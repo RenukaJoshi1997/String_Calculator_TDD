@@ -4,8 +4,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class StringCalculator {
+	static {
+		count = 0;
+	}
+	static int count;
 
 	public int add(String input) throws Exception {
+		++count;
+		
 		String[] numbers = input.split(",|\n");
 
 		if(input.isEmpty())
@@ -57,6 +63,7 @@ class StringCalculator {
 		throw new RuntimeException("Wrong custom delimiter format");
 	}
 
+	//Method to throw exception for negative numbers
 	private void negativeNumberNotAllowed(String[] numbers) throws Exception
 	{
 		for(String num: numbers)
@@ -68,6 +75,12 @@ class StringCalculator {
 				throw new Exception("negative not allowed" + getIntFromString(num));
 			}	
 		}
+	}
+	
+	//Method to count how many times add() method invoked 
+	public int getCalledCount()
+	{
+		return count;
 	}
 
 }
