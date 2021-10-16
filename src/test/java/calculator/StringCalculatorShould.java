@@ -32,4 +32,9 @@ class StringCalculatorShould {
 	void string_return_sum_of_numbers_separated_by_spaceline() {
 		assertEquals(6, stringCalculator.add("1,2\n3"));
 	}
+    
+    @Test
+	void string_support_different_delimiter() {
+		assertEquals(6, stringCalculator.add("//;\n1;2;3"));
+	}
 }
