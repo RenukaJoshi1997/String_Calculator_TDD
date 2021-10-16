@@ -10,11 +10,16 @@ class StringCalculator {
 			return 0;
 		}
 		if(input.length() == 1) {
-			return Integer.parseInt(input);
+			return getIntFromString(input);
 		}
 		else
 		{
-			return Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);
+			return getIntFromString(numbers[0]) + getIntFromString(numbers[1]);
 		}
+	}
+	
+	//Method to convert String to int
+	private int getIntFromString(String num) {
+		return Integer.parseInt(num);
 	}
 }
