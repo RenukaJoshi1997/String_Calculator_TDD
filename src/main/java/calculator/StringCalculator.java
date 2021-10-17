@@ -1,5 +1,6 @@
 package calculator;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ class StringCalculator {
 
 	public int add(String input) throws Exception {
 		++count;
-		
+
 		String[] numbers = input.split(",|\n");
 
 		//return 0 if string is empty
@@ -19,18 +20,26 @@ class StringCalculator {
 		{
 			return 0;
 		}
-		
+
 		//string_with_single_number_should_return_number_as_int 
 		if(input.length() == 1) {
 			return getIntFromString(input);
 		}
 		
+		//string Support Custom Delimiter
+		else if(input.startsWith("//["))
+		{
+			return customDelimiter(input);
+		}
+
 		//string_support_different_delimiter
 		else if(input.startsWith("//")){
 			String[] del =  getDelimiter(input);
-			return getSumOfNumbers(del);
+			return getSumOfNumbers(del);	
 		}
+
 		
+
 		//string_return_sum_of_two_numbers & string_return_sum_of_unknown_amount_of_numbers
 		else
 		{
@@ -47,7 +56,8 @@ class StringCalculator {
 	private int getSumOfNumbers(String[] numbers) throws Exception
 	{
 		negativeNumberNotAllowed(numbers);
-		
+
+
 		int sum = 0;
 		for(int i = 0; i < numbers.length; i++)
 		{
@@ -81,18 +91,46 @@ class StringCalculator {
 		for(String num: numbers)
 		{
 			Matcher matcher = Pattern.compile("/-\\d+/g").matcher(num);
-			
+
 			if(matcher.matches())
 			{
 				throw new Exception("negative not allowed" + getIntFromString(num));
 			}	
 		}
 	}
-	
+
 	//Method to count how many times add() method invoked 
 	public int getCalledCount()
 	{
 		return count;
+	}
+
+	//Method to support custom Delimiter
+	private int customDelimiter(String input)
+	{
+		String brack = input.substring(2, 3);
+
+		int [] numbers = new int[100];
+		int sum = 0;
+
+		if(brack.contains("[")){
+
+			int closeIndex = input.indexOf("]");
+			String delimiter = input.substring(2,closeIndex);
+
+			int nIndex = input.indexOf("\n");
+			String numberSting = input.substring(nIndex+1, input.length());
+
+			for(int i = 0; i<numberSting.length(); ){
+
+				int n = Integer.parseInt(numberSting.charAt(i)+"");
+				sum = sum + n;
+				
+				i =  i + delimiter.length();
+
+			}
+		}
+		return sum;
 	}
 
 }
