@@ -110,7 +110,6 @@ class StringCalculator {
 	{
 		String brack = input.substring(2, 3);
 
-		int [] numbers = new int[100];
 		int sum = 0;
 
 		if(brack.contains("[")){
@@ -119,14 +118,14 @@ class StringCalculator {
 			String delimiter = input.substring(2,closeIndex);
 
 			int nIndex = input.indexOf("\n");
-			String numberSting = input.substring(nIndex+1, input.length());
+			String numberString = input.substring(nIndex+1, input.length());
 
-			for(int i = 0; i<numberSting.length(); ){
+			for(int num = 0; num<numberString.length(); ){
 
-				int n = Integer.parseInt(numberSting.charAt(i)+"");
-				sum = sum + n;
+				int n = Integer.parseInt(numberString.charAt(num)+"");
+				sum += n;
 				
-				i =  i + delimiter.length();
+				num += delimiter.length();
 
 			}
 		}
