@@ -62,4 +62,9 @@ class StringCalculatorShould {
 	void should_support_multiple_delimiter() throws Exception {
 		assertEquals(6, stringCalculator.add("//[*][%]\n1*2%3"));
 	}
+	
+	@Test
+	void should_support_multiple_delimiter_longer_length() throws Exception {
+		assertEquals(6, stringCalculator.add("//[**][%%]\n1**2%%3"));
+	}
 }

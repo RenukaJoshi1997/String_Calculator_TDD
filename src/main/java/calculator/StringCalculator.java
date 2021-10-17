@@ -108,25 +108,22 @@ class StringCalculator {
 	//Method to support custom Delimiter
 	private int customDelimiter(String input)
 	{
-		String brack = input.substring(2, 3);
-
+		String bracket = input.substring(2, 3);
+		int newLineIndex = input.indexOf("\n");
+		String numberString = input.substring(newLineIndex+1, input.length());
+		
 		int sum = 0;
 
-		if(brack.contains("[")){
+		if(bracket.contains("[")){
 
 			int closeIndex = input.indexOf("]");
 			String delimiter = input.substring(2,closeIndex);
 
-			int nIndex = input.indexOf("\n");
-			String numberString = input.substring(nIndex+1, input.length());
-
-			for(int num = 0; num<numberString.length(); ){
-
+			for(int num = 0; num<numberString.length(); ) {
 				int n = Integer.parseInt(numberString.charAt(num)+"");
 				sum += n;
 				
 				num += delimiter.length();
-
 			}
 		}
 		return sum;
