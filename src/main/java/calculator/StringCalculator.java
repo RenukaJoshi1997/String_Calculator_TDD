@@ -57,16 +57,15 @@ class StringCalculator {
 	{
 		negativeNumberNotAllowed(numbers);
 
-
 		int sum = 0;
 		for(int i = 0; i < numbers.length; i++)
 		{
 			//ignore_number_greater_than_1000
-			if(Integer.parseInt(numbers[i]) > 1000)
+			if(getIntFromString(numbers[i]) > 1000)
 			{
 				continue;
 			}
-			sum += Integer.parseInt(numbers[i]);
+			sum += getIntFromString(numbers[i]);
 		}
 		return sum;
 	}
@@ -120,7 +119,7 @@ class StringCalculator {
 			String delimiter = input.substring(2,closeIndex);
 
 			for(int num = 0; num<numberString.length(); ) {
-				int n = Integer.parseInt(numberString.charAt(num)+"");
+				int n = getIntFromString(numberString.charAt(num)+"");
 				sum += n;
 				
 				num += delimiter.length();
